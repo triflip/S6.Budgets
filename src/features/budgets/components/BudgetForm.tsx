@@ -58,7 +58,6 @@ export const BudgetForm: React.FC = () => {
         />
       </div>
 
-      {/* Total */}
       <div className="p-4 bg-blue-100 rounded-md text-center font-semibold">
         Total: {totalBudget} €
       </div>

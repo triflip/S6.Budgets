@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Checkbox } from "../../../shared/ui/checkbox";
+import { Checkbox } from "../../../shared/ui/Checkbox";
 
 export const BudgetForm: React.FC = () => {
   const [seoSelected, setSeoSelected] = useState(false);

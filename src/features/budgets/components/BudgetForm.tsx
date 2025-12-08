@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Checkbox } from "../../../shared/ui/Checkbox";
-import { WebOptions } from "../../budgets/components/webOptions/WebOptions";
+import { WebOptions } from "../../webOptions/WebOptions";
+import { useNavigate } from "react-router-dom";
+
 
 export const BudgetForm: React.FC = () => {
+  const navigate = useNavigate();
+
   const [seoSelected, setSeoSelected] = useState(false);
   const [adsSelected, setAdsSelected] = useState(false);
   const [webSelected, setWebSelected] = useState(false);
@@ -58,6 +62,13 @@ export const BudgetForm: React.FC = () => {
       <div className="p-4 bg-blue-100 rounded-md text-center font-semibold">
         Total: {totalBudget} €
       </div>
+
+        <button
+        onClick={() => navigate("/")}
+        className="px-4 py-2 bg-blue-500 text-white rounded-md"
+      >
+        Back home
+      </button>
     </div>
   );
 };

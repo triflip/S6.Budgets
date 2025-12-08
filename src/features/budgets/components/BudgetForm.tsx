@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Checkbox } from "../../../shared/ui/Checkbox";
+import { WebOptions } from "../../budgets/components/webOptions/WebOptions";
 
 export const BudgetForm: React.FC = () => {
   const [seoSelected, setSeoSelected] = useState(false);
@@ -7,13 +8,16 @@ export const BudgetForm: React.FC = () => {
   const [webSelected, setWebSelected] = useState(false);
   const [totalBudget, setTotalBudget] = useState(0);
 
-  const calculateTotal = (seo: boolean, ads: boolean, web: boolean) => {
+  const [pages, setPages] = useState(0);
+  const [languages, setLanguages] = useState(0);
+
+  useEffect(() => {
     let total = 0;
-    if (seo) total += 300;
-    if (ads) total += 400;
-    if (web) total += 500;
+    if (seoSelected) total += 300;
+    if (adsSelected) total += 400;
+    if (webSelected) total += 500 + (pages + languages) * 30;
     setTotalBudget(total);
-  };
+  }, [seoSelected, adsSelected, webSelected, pages, languages]);
 
   return (
     <div className="max-w-md mx-auto p-6 bg-gray-100 rounded-lg shadow-md space-y-4">
@@ -23,12 +27,7 @@ export const BudgetForm: React.FC = () => {
         <Checkbox
           label="SEO Campaign (300€)"
           checked={seoSelected}
-          onChange={(checked) =>
-            {
-              setSeoSelected(checked);
-              calculateTotal(checked, adsSelected, webSelected);
-            }
-          }
+          onChange={setSeoSelected}
         />
       </div>
 
@@ -36,12 +35,7 @@ export const BudgetForm: React.FC = () => {
         <Checkbox
           label="Advertising Campaign (400€)"
           checked={adsSelected}
-          onChange={(checked) =>
-            {
-              setAdsSelected(checked);
-              calculateTotal(seoSelected, checked, webSelected);
-            }
-          }
+          onChange={setAdsSelected}
         />
       </div>
 
@@ -49,13 +43,16 @@ export const BudgetForm: React.FC = () => {
         <Checkbox
           label="Website (500€)"
           checked={webSelected}
-          onChange={(checked) =>
-            {
-              setWebSelected(checked);
-              calculateTotal(seoSelected, adsSelected, checked);
-            }
-          }
-        />
+          onChange={setWebSelected}
+          />
+          {webSelected && (
+            <WebOptions
+              pages={pages}
+              setPages={setPages}
+              languages={languages}
+              setLanguages={setLanguages}
+            />
+          )}
       </div>
 
       <div className="p-4 bg-blue-100 rounded-md text-center font-semibold">

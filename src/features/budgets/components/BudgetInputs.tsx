@@ -14,25 +14,24 @@ export const BudgetInputs: React.FC<BudgetInputsProps> = ({
   onAdd,
 }) => {
   return (
-    <div className="p-4 bg-white rounded-md shadow-sm space-y-2">
+    <div className="p-6 bg-gray-800 rounded-xl shadow-md space-y-4">
       <input
         type="text"
         placeholder="Budget name"
         value={budgetName}
         onChange={(e) => setBudgetName(e.target.value)}
-        className="w-full p-2 border rounded"
-        
+        className="w-full p-3 rounded-lg bg-gray-900 text-gray-200 placeholder-gray-500 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
       <input
         type="text"
         placeholder="Customer name"
         value={clientName}
         onChange={(e) => setClientName(e.target.value)}
-        className="w-full p-2 border rounded"
+        className="w-full p-3 rounded-lg bg-gray-900 text-gray-200 placeholder-gray-500 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-fuchsia-500"
       />
       <button
         onClick={onAdd}
-        className="px-4 py-2 bg-green-500 text-white rounded-md"
+        className="w-full px-6 py-3 rounded-3xl bg-gradient-to-r from-blue-500 to-fuchsia-600 text-white text-lg font-semibold shadow-lg hover:scale-105 transform transition"
       >
         Add budget
       </button>

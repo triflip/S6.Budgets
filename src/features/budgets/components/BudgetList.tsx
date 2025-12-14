@@ -30,13 +30,53 @@ export const BudgetList: React.FC<BudgetListProps> = ({ budgets }) => {
       b.phone.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const sortByClient = () => {
+    setSortedBudgets([...sortedBudgets].sort((a, b) => a.client.localeCompare(b.client)));
+  };
+
+  const sortByDate = () => {
+    setSortedBudgets([...sortedBudgets].sort(
+      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+    ));
+  };
+
+  const resetOrder = () => {
+    setSortedBudgets(budgets);
+    setSearchTerm("");
+  };
+
   return (
     <div className="mt-6">
       <h3 className="ml-3 text-lg font-bold text-gray-200">Pending budgets</h3>
+
+      
+      <BudgetSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+
+      
+      <div className="flex gap-4 mb-4">
+        <button
+          onClick={sortByClient}
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        >
+          Sort by Client ↑↓
+        </button>
+        <button
+          onClick={sortByDate}
+          className="px-4 py-2 bg-fuchsia-600 text-white rounded hover:bg-fuchsia-700"
+        >
+          Sort by Date 📅
+        </button>
+        <button
+          onClick={resetOrder}
+          className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
+        >
+          Reset ↺
+        </button>
+      </div>
+
+    
+    
       <div className="overflow-y-scroll h-[300px] space-y-2 p-2 bg-gray-800 rounded-md">
-
-        <BudgetSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-
         <ul className="space-y-2">
           {filteredBudgets.map((b) => (
             <li

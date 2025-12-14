@@ -64,7 +64,7 @@ export const BudgetList: React.FC<BudgetListProps> = ({ budgets }) => {
           onClick={sortByDate}
           className="px-4 py-2 bg-fuchsia-600 text-white rounded hover:bg-fuchsia-700"
         >
-          Sort by Date 📅
+          Sort by Date ↑↓
         </button>
         <button
           onClick={resetOrder}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Checkbox } from "../../../shared/ui/Checkbox.tsx";
+import { Checkbox } from "../../../shared/ui/Checkbox";
 import { WebOptions } from "../../webOptions/WebOptions";
 import { useNavigate } from "react-router-dom";
 import { BudgetInputs } from "../components/BudgetInputs";

@@ -16,7 +16,6 @@ export const BudgetForm: React.FC = () => {
   const [pages, setPages] = useState(0);
   const [languages, setLanguages] = useState(0);
 
-  const [budgetName, setBudgetName] = useState("");
   const [clientName, setClientName] = useState("");
   const [clientPhone, setClientPhone] = useState("");
   const [clientEmail, setClientEmail] = useState("");
@@ -24,7 +23,6 @@ export const BudgetForm: React.FC = () => {
   const [budgets, setBudgets] = useState<
     {
       id: number;
-      name: string;
       client: string;
       services: string[];
       phone: string;
@@ -43,7 +41,7 @@ export const BudgetForm: React.FC = () => {
   }, [seoSelected, adsSelected, webSelected, pages, languages]);
 
   const handleAddBudget = () => {
-    if (!budgetName || !clientName || !clientPhone || !clientEmail) {
+    if (!clientName || !clientPhone || !clientEmail) {
       alert("All fields are required");
       return;
     }
@@ -69,7 +67,6 @@ export const BudgetForm: React.FC = () => {
       ...budgets,
       {
         id: Date.now(),
-        name: budgetName,
         client: clientName,
         services: selectedServices,
         total: totalBudget,
@@ -79,10 +76,16 @@ export const BudgetForm: React.FC = () => {
       },
     ]);
 
-    setBudgetName("");
     setClientName("");
     setClientPhone("");
     setClientEmail("");
+
+    setSeoSelected(false);
+    setAdsSelected(false);
+    setWebSelected(false);
+
+    setPages(0);
+    setLanguages(0);
   };
 
   return (

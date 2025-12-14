@@ -139,8 +139,6 @@ export const BudgetForm: React.FC = () => {
 
         <div className="space-y-8 p-4 bg-gray-800 rounded-md">
           <BudgetInputs
-            budgetName={budgetName}
-            setBudgetName={setBudgetName}
             clientName={clientName}
             setClientName={setClientName}
             clientPhone={clientPhone}

@@ -1,6 +1,4 @@
 type BudgetInputsProps = {
-  budgetName: string;
-  setBudgetName: (val: string) => void;
   clientName: string;
   setClientName: (val: string) => void;
   clientPhone: string;
@@ -11,8 +9,6 @@ type BudgetInputsProps = {
 };
 
 export const BudgetInputs: React.FC<BudgetInputsProps> = ({
-  budgetName,
-  setBudgetName,
   clientName,
   setClientName,
   clientPhone,
@@ -23,13 +19,6 @@ export const BudgetInputs: React.FC<BudgetInputsProps> = ({
 }) => {
   return (
     <div className="p-6 bg-gray-800 rounded-xl shadow-md space-y-4">
-      <input
-        type="text"
-        placeholder="Budget name"
-        value={budgetName}
-        onChange={(e) => setBudgetName(e.target.value)}
-        className="w-full p-3 rounded-lg bg-gray-900 text-gray-200 placeholder-gray-500 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
       <input
         type="text"
         placeholder="Customer name"

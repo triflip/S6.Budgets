@@ -1,6 +1,5 @@
 type Budget = {
   id: number;
-  name: string;
   client: string;
   phone: string;
   email: string;
@@ -25,7 +24,7 @@ export const BudgetList: React.FC<BudgetListProps> = ({ budgets }) => {
         {budgets.map((b) => (
           <li key={b.id} className="p-3 bg-gray-900 rounded text-gray-200 shadow-sm">
             <p className="font-semibold">
-              Budget: {b.name} --- Client: {b.client}
+              Client: {b.client}
             </p>
             <p>Services: {b.services.join(", ")} --- Total: {b.total} €</p>
             <p>Phone: {b.phone} --- Email: {b.email}</p>

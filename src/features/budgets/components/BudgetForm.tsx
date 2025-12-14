@@ -18,16 +18,15 @@ export const BudgetForm: React.FC = () => {
 
   const [budgetName, setBudgetName] = useState("");
   const [clientName, setClientName] = useState("");
+  const [clientPhone, setClientPhone] = useState("");
+  const [clientEmail, setClientEmail] = useState("");
+
   const [budgets, setBudgets] = useState<
-    {
-      id: number;
-      name: string;
-      client: string;
-      services: string[];
-      total: number;
-      date: string;
-    }[]
+    { id: number; name: string; client: string; services: string[];phone: string;
+  email: string; total: number; date: string }[]
   >([]);
+
+  
 
   useEffect(() => {
     let total = 0;
@@ -38,6 +37,26 @@ export const BudgetForm: React.FC = () => {
   }, [seoSelected, adsSelected, webSelected, pages, languages]);
 
   const handleAddBudget = () => {
+
+     if (!budgetName || !clientName || !clientPhone || !clientEmail) {
+    alert("All fields are required");
+    return;
+  }
+
+  
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(clientEmail)) {
+    alert("Invalid email");
+    return;
+  }
+
+  
+  const phoneRegex = /^[0-9]{9}$/;
+  if (!phoneRegex.test(clientPhone)) {
+    alert("Invalid phone");
+    return;
+  }
+
     const selectedServices: string[] = [];
     if (seoSelected) selectedServices.push("SEO");
     if (adsSelected) selectedServices.push("Ads");
@@ -51,12 +70,16 @@ export const BudgetForm: React.FC = () => {
         client: clientName,
         services: selectedServices,
         total: totalBudget,
-        date: new Date().toLocaleDateString(),
+        phone: clientPhone,
+        email: clientEmail,
+        date: new Date().toLocaleDateString()
       },
     ]);
 
     setBudgetName("");
     setClientName("");
+    setClientPhone("");
+    setClientEmail("");
   };
 
   return (

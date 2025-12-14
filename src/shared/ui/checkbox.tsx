@@ -1,4 +1,4 @@
-// Checkbox.tsx
+
 import React from "react";
 
 interface CheckboxProps {

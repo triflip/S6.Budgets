@@ -70,7 +70,7 @@ export const BudgetForm: React.FC = () => {
 
         <div className="p-4 tracking-wider bg-gray-800 rounded-md shadow-sm flex justify-between items-center">
           <Checkbox
-            label="SEO Campaign (300€)"
+            label="SEO Campaign  (300€)"
             checked={seoSelected}
             onChange={setSeoSelected}
           />
@@ -78,7 +78,7 @@ export const BudgetForm: React.FC = () => {
 
         <div className="p-4 tracking-wider bg-gray-800 rounded-md shadow-sm flex justify-between items-center">
           <Checkbox
-            label="Advertising Campaign (400€)"
+            label="Advertising Campaign  (400€)"
             checked={adsSelected}
             onChange={setAdsSelected}
           />
@@ -86,7 +86,7 @@ export const BudgetForm: React.FC = () => {
 
         <div className="p-4 tracking-wider bg-gray-800 rounded-md shadow-sm">
           <Checkbox
-            label="Website (500€)"
+            label="Website  (500€)"
             checked={webSelected}
             onChange={setWebSelected}
           />

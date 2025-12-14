@@ -2,10 +2,13 @@ type Budget = {
   id: number;
   name: string;
   client: string;
+  phone: string;
+  email: string;
   services: string[];
   total: number;
   date: string;
 };
+
 
 type BudgetListProps = {
   budgets: Budget[];
@@ -24,6 +27,8 @@ export const BudgetList: React.FC<BudgetListProps> = ({ budgets }) => {
             <p>Services: {b.services.join(", ")}</p>
             <p>Total: {b.total} €</p>
             <p>Date: {b.date}</p>
+            <p>Phone: {b.phone}</p>
+            <p>Email: {b.email}</p>
           </li>
         ))}
       </ul>

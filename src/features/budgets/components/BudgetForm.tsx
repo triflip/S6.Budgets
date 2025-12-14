@@ -22,11 +22,17 @@ export const BudgetForm: React.FC = () => {
   const [clientEmail, setClientEmail] = useState("");
 
   const [budgets, setBudgets] = useState<
-    { id: number; name: string; client: string; services: string[];phone: string;
-  email: string; total: number; date: string }[]
+    {
+      id: number;
+      name: string;
+      client: string;
+      services: string[];
+      phone: string;
+      email: string;
+      total: number;
+      date: string;
+    }[]
   >([]);
-
-  
 
   useEffect(() => {
     let total = 0;
@@ -37,25 +43,22 @@ export const BudgetForm: React.FC = () => {
   }, [seoSelected, adsSelected, webSelected, pages, languages]);
 
   const handleAddBudget = () => {
+    if (!budgetName || !clientName || !clientPhone || !clientEmail) {
+      alert("All fields are required");
+      return;
+    }
 
-     if (!budgetName || !clientName || !clientPhone || !clientEmail) {
-    alert("All fields are required");
-    return;
-  }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(clientEmail)) {
+      alert("Invalid email");
+      return;
+    }
 
-  
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(clientEmail)) {
-    alert("Invalid email");
-    return;
-  }
-
-  
-  const phoneRegex = /^[0-9]{9}$/;
-  if (!phoneRegex.test(clientPhone)) {
-    alert("Invalid phone");
-    return;
-  }
+    const phoneRegex = /^[0-9]{9}$/;
+    if (!phoneRegex.test(clientPhone)) {
+      alert("Invalid phone");
+      return;
+    }
 
     const selectedServices: string[] = [];
     if (seoSelected) selectedServices.push("SEO");
@@ -72,7 +75,7 @@ export const BudgetForm: React.FC = () => {
         total: totalBudget,
         phone: clientPhone,
         email: clientEmail,
-        date: new Date().toLocaleDateString()
+        date: new Date().toLocaleDateString(),
       },
     ]);
 
@@ -83,71 +86,73 @@ export const BudgetForm: React.FC = () => {
   };
 
   return (
-  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800">
-    <div className="max-w-7xl w-full mx-auto p-10 rounded-xl shadow-lg bg-gray-900/80 backdrop-blur grid grid-cols-2 gap-8">
-      
-      <div className="space-y-6 text-xl text-gray-200">
-        <h2 className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-fuchsia-500 to-pink-500">
-          ~ Budget Calculator ~
-        </h2>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800">
+      <div className="max-w-7xl w-full mx-auto p-10 rounded-xl shadow-lg bg-gray-900/80 backdrop-blur grid grid-cols-2 gap-8">
+        <div className="space-y-6 text-xl text-gray-200">
+          <h2 className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-fuchsia-500 to-pink-500">
+            ~ Budget Calculator ~
+          </h2>
 
-        <div className="p-4 tracking-wider bg-gray-800 rounded-md shadow-sm flex justify-between items-center">
-          <Checkbox
-            label="SEO Campaign  (300€)"
-            checked={seoSelected}
-            onChange={setSeoSelected}
-          />
-        </div>
-
-        <div className="p-4 tracking-wider bg-gray-800 rounded-md shadow-sm flex justify-between items-center">
-          <Checkbox
-            label="Advertising Campaign  (400€)"
-            checked={adsSelected}
-            onChange={setAdsSelected}
-          />
-        </div>
-
-        <div className="p-4 tracking-wider bg-gray-800 rounded-md shadow-sm">
-          <Checkbox
-            label="Website  (500€)"
-            checked={webSelected}
-            onChange={setWebSelected}
-          />
-          {webSelected && (
-            <WebOptions
-              pages={pages}
-              setPages={setPages}
-              languages={languages}
-              setLanguages={setLanguages}
+          <div className="p-4 tracking-wider bg-gray-800 rounded-md shadow-sm flex justify-between items-center">
+            <Checkbox
+              label="SEO Campaign  (300€)"
+              checked={seoSelected}
+              onChange={setSeoSelected}
             />
-          )}
+          </div>
+
+          <div className="p-4 tracking-wider bg-gray-800 rounded-md shadow-sm flex justify-between items-center">
+            <Checkbox
+              label="Advertising Campaign  (400€)"
+              checked={adsSelected}
+              onChange={setAdsSelected}
+            />
+          </div>
+
+          <div className="p-4 tracking-wider bg-gray-800 rounded-md shadow-sm">
+            <Checkbox
+              label="Website  (500€)"
+              checked={webSelected}
+              onChange={setWebSelected}
+            />
+            {webSelected && (
+              <WebOptions
+                pages={pages}
+                setPages={setPages}
+                languages={languages}
+                setLanguages={setLanguages}
+              />
+            )}
+          </div>
+
+          <div className="text-3xl tracking-wider p-4 bg-gray-800 rounded-md text-white font-semibold shadow-md">
+            Total: {totalBudget} €
+          </div>
+
+          <button
+            onClick={() => navigate("/")}
+            className=" mt-6 ml-52 px-6 py-3 rounded-3xl bg-gradient-to-r from-blue-500 to-fuchsia-600 text-white text-lg font-semibold shadow-lg hover:scale-105 transform transition"
+          >
+            ⬅ Back home
+          </button>
         </div>
 
-        <div className="text-3xl tracking-wider p-4 bg-gray-800 rounded-md text-white font-semibold shadow-md">
-          Total: {totalBudget} €
+        <div className="space-y-8 p-4 bg-gray-800 rounded-md">
+          <BudgetInputs
+            budgetName={budgetName}
+            setBudgetName={setBudgetName}
+            clientName={clientName}
+            setClientName={setClientName}
+            clientPhone={clientPhone}
+            setClientPhone={setClientPhone}
+            clientEmail={clientEmail}
+            setClientEmail={setClientEmail}
+            onAdd={handleAddBudget}
+          />
+
+          <BudgetList budgets={budgets} />
         </div>
-
-        <button
-          onClick={() => navigate("/")}
-          className=" mt-6 ml-52 px-6 py-3 rounded-3xl bg-gradient-to-r from-blue-500 to-fuchsia-600 text-white text-lg font-semibold shadow-lg hover:scale-105 transform transition"
-        >
-          ⬅ Back home
-        </button>
-      </div>
-
-      <div className="space-y-8 p-4 bg-gray-800 rounded-md">
-        <BudgetInputs
-          budgetName={budgetName}
-          setBudgetName={setBudgetName}
-          clientName={clientName}
-          setClientName={setClientName}
-          onAdd={handleAddBudget}
-        />
-
-        <BudgetList budgets={budgets} />
       </div>
     </div>
-  </div>
-);
-
+  );
 };

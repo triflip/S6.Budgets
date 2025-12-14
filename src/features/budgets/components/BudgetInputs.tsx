@@ -3,6 +3,10 @@ type BudgetInputsProps = {
   setBudgetName: (val: string) => void;
   clientName: string;
   setClientName: (val: string) => void;
+  clientPhone: string;
+  setClientPhone: (val: string) => void;
+  clientEmail: string;
+  setClientEmail: (val: string) => void;
   onAdd: () => void;
 };
 
@@ -11,6 +15,10 @@ export const BudgetInputs: React.FC<BudgetInputsProps> = ({
   setBudgetName,
   clientName,
   setClientName,
+  clientPhone,
+  setClientPhone,
+  clientEmail,
+  setClientEmail,
   onAdd,
 }) => {
   return (
@@ -28,6 +36,20 @@ export const BudgetInputs: React.FC<BudgetInputsProps> = ({
         value={clientName}
         onChange={(e) => setClientName(e.target.value)}
         className="w-full p-3 rounded-lg bg-gray-900 text-gray-200 placeholder-gray-500 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-fuchsia-500"
+      />
+      <input
+        type="tel"
+        placeholder="Phone number"
+        value={clientPhone}
+        onChange={(e) => setClientPhone(e.target.value)}
+        className="w-full p-3 rounded-lg bg-gray-900 text-gray-200 placeholder-gray-500 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+      />
+      <input
+        type="email"
+        placeholder="Email"
+        value={clientEmail}
+        onChange={(e) => setClientEmail(e.target.value)}
+        className="w-full p-3 rounded-lg bg-gray-900 text-gray-200 placeholder-gray-500 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-pink-500"
       />
       <button
         onClick={onAdd}

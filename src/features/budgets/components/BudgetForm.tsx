@@ -4,6 +4,7 @@ import { WebOptions } from "../../webOptions/WebOptions";
 import { useNavigate, useLocation } from "react-router-dom";
 import { BudgetInputs } from "../components/BudgetInputs";
 import { BudgetList } from "../components/BudgetList";
+import { CopyUrlButton } from "../../../shared/ui/CopyUrlButton";
 
 export const BudgetForm: React.FC = () => {
   const navigate = useNavigate();
@@ -44,9 +45,8 @@ export const BudgetForm: React.FC = () => {
     setTotalBudget(total);
   }, [seoSelected, adsSelected, webSelected, pages, languages]);
 
-
   // actualitza url amb els params
-   useEffect(() => {
+  useEffect(() => {
     const params = new URLSearchParams();
     if (seoSelected) params.set("CampaingSeo", "true");
     if (adsSelected) params.set("Ads", "true");
@@ -92,13 +92,15 @@ export const BudgetForm: React.FC = () => {
     if (adsSelected) selectedServices.push("Ads");
     if (webSelected) selectedServices.push("Web");
 
+    const finalTotal = annualDiscount ? totalBudget * 0.8 : totalBudget;
+
     setBudgets([
       ...budgets,
       {
         id: Date.now(),
         client: clientName,
         services: selectedServices,
-        total: totalBudget,
+        total: finalTotal,
         phone: clientPhone,
         email: clientEmail,
         date: new Date().toLocaleDateString(),
@@ -161,7 +163,7 @@ export const BudgetForm: React.FC = () => {
             Total: {annualDiscount ? totalBudget * 0.8 : totalBudget} €
           </div>
 
-          <div className="mt-4">
+          <div className="mt-4 space-x-28">
             <button
               onClick={() => setAnnualDiscount(!annualDiscount)}
               className={`px-4 py-2 rounded text-white ${
@@ -175,16 +177,16 @@ export const BudgetForm: React.FC = () => {
                 : "Apply Annual Discount"}
             </button>
 
-            {annualDiscount && (
-              <p className="text-green-400 text-sm mt-2">
-                (20% discount applied)
-              </p>
-            )}
+            
           </div>
 
+          <div>
+              <CopyUrlButton label="Copy URL 🔗" />
+          </div>
+          
           <button
             onClick={() => navigate("/")}
-            className=" mt-6 ml-52 px-6 py-3 rounded-3xl bg-gradient-to-r from-blue-500 to-fuchsia-600 text-white text-lg font-semibold shadow-lg hover:scale-105 transform transition"
+            className=" mb-5 ml-52 px-6 py-3 rounded-3xl bg-gradient-to-r from-blue-500 to-fuchsia-600 text-white text-lg font-semibold shadow-lg hover:scale-105 transform transition"
           >
             ⬅ Back home
           </button>

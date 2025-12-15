@@ -1,5 +1,6 @@
 
 import React from "react";  
+import { toast } from "react-toastify";
 
 type CopyUrlButtonProps = {
     label: string;
@@ -8,8 +9,8 @@ type CopyUrlButtonProps = {
 export const CopyUrlButton: React.FC<CopyUrlButtonProps> = ({ label = "Copy URL 🔗" }) => {
   const handleCopyUrl = () => {
     navigator.clipboard.writeText(window.location.href)
-      .then(() => alert("URL copied to clipboard!"))
-      .catch(() => alert("Failed to copy URL"));
+      .then(() => toast.success("URL copied to clipboard!"))
+      .catch(() => toast.error("Failed to copy URL"));
   };
 
   return (

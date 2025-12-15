@@ -20,6 +20,8 @@ export const BudgetForm: React.FC = () => {
   const [clientPhone, setClientPhone] = useState("");
   const [clientEmail, setClientEmail] = useState("");
 
+  const [annualDiscount, setAnnualDiscount] = useState(false);
+
   const [budgets, setBudgets] = useState<
     {
       id: number;
@@ -129,7 +131,28 @@ export const BudgetForm: React.FC = () => {
           </div>
 
           <div className="text-3xl tracking-wider p-4 bg-gray-800 rounded-md text-white font-semibold shadow-md">
-            Total: {totalBudget} €
+            Total: {annualDiscount ? totalBudget * 0.8 : totalBudget} €
+          </div>
+
+          <div className="mt-4">
+            <button
+              onClick={() => setAnnualDiscount(!annualDiscount)}
+              className={`px-4 py-2 rounded text-white ${
+                annualDiscount
+                  ? "bg-green-600 hover:bg-green-700"
+                  : "bg-gray-600 hover:bg-gray-700"
+              }`}
+            >
+              {annualDiscount
+                ? "Annual Discount Applied (-20%)"
+                : "Apply Annual Discount"}
+            </button>
+
+            {annualDiscount && (
+              <p className="text-green-400 text-sm mt-2">
+                (20% discount applied)
+              </p>
+            )}
           </div>
 
           <button

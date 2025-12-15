@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Checkbox } from "../../../shared/ui/Checkbox1";
 import { WebOptions } from "../../webOptions/WebOptions";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { BudgetInputs } from "../components/BudgetInputs";
 import { BudgetList } from "../components/BudgetList";
 
 export const BudgetForm: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [seoSelected, setSeoSelected] = useState(false);
   const [adsSelected, setAdsSelected] = useState(false);
@@ -39,8 +40,34 @@ export const BudgetForm: React.FC = () => {
     if (seoSelected) total += 300;
     if (adsSelected) total += 400;
     if (webSelected) total += 500 + (pages + languages) * 30;
+    if (annualDiscount) total = total * 0.8;
     setTotalBudget(total);
   }, [seoSelected, adsSelected, webSelected, pages, languages]);
+
+
+  // actualitza url amb els params
+   useEffect(() => {
+    const params = new URLSearchParams();
+    if (seoSelected) params.set("CampaingSeo", "true");
+    if (adsSelected) params.set("Ads", "true");
+    if (webSelected) params.set("WebPage", "true");
+    params.set("pages", pages.toString());
+    params.set("lang", languages.toString());
+    if (annualDiscount) params.set("discount", "true");
+
+    navigate(`?${params.toString()}`, { replace: true });
+  }, [seoSelected, adsSelected, webSelected, pages, languages, annualDiscount]);
+
+  //  llegeix els params quan es carrega la pàgina
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    setSeoSelected(params.get("CampaingSeo") === "true");
+    setAdsSelected(params.get("Ads") === "true");
+    setWebSelected(params.get("WebPage") === "true");
+    setPages(Number(params.get("pages")) || 0);
+    setLanguages(Number(params.get("lang")) || 0);
+    setAnnualDiscount(params.get("discount") === "true");
+  }, [location.search]);
 
   const handleAddBudget = () => {
     if (!clientName || !clientPhone || !clientEmail) {

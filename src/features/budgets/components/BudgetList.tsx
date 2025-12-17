@@ -47,41 +47,39 @@ export const BudgetList: React.FC<BudgetListProps> = ({ budgets }) => {
 
   return (
     <div className="mt-6">
-      <h3 className="ml-3 text-lg font-bold text-gray-200">Pending budgets</h3>
+      <h3 className="text-base sm:text-lg font-bold text-gray-200 text-center sm:text-left mb-2">
+        Pending budgets
+      </h3>
 
-      
       <BudgetSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
-      
-      <div className="flex gap-4 mb-4">
+      <div className="flex flex-col md:flex-row gap-2 md:gap-4 mb-4">
         <button
           onClick={sortByClient}
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          className="px-3 py-2 sm:px-4 sm:py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
         >
           Sort by Client ↑↓
         </button>
         <button
           onClick={sortByDate}
-          className="px-4 py-2 bg-fuchsia-600 text-white rounded hover:bg-fuchsia-700"
+          className="px-3 py-2 sm:px-4 sm:py-2 bg-fuchsia-600 text-white rounded hover:bg-fuchsia-700"
         >
           Sort by Date ↑↓
         </button>
         <button
           onClick={resetOrder}
-          className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
+          className="px-3 py-2 sm:px-4 sm:py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
         >
           Reset ↺
         </button>
       </div>
 
-    
-    
-      <div className="overflow-y-scroll h-[300px] space-y-2 p-2 bg-gray-800 rounded-md">
+      <div className="overflow-y-scroll h-[200px] sm:h-[300px] space-y-2 p-2 bg-gray-800 rounded-md">
         <ul className="space-y-2">
           {filteredBudgets.map((b) => (
             <li
               key={b.id}
-              className="p-3 bg-gray-900 rounded text-gray-200 shadow-sm"
+              className="p-2 sm:p-3 bg-gray-900 rounded text-gray-200 shadow-sm"
             >
               <p className="font-semibold">Client: {b.client}</p>
               <p>

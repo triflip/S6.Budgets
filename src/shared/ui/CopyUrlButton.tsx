@@ -1,10 +1,9 @@
-
 import React from "react";  
 import { toast } from "react-toastify";
 
 type CopyUrlButtonProps = {
-    label: string;
-}
+  label: string;
+};
 
 export const CopyUrlButton: React.FC<CopyUrlButtonProps> = ({ label = "Copy URL 🔗" }) => {
   const handleCopyUrl = () => {
@@ -15,10 +14,12 @@ export const CopyUrlButton: React.FC<CopyUrlButtonProps> = ({ label = "Copy URL 
 
   return (
     <button
-    onClick={handleCopyUrl}
-    className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
+      onClick={handleCopyUrl}
+      className="w-full sm:w-auto px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 
+                 rounded bg-blue-600 text-white text-sm sm:text-base md:text-lg 
+                 font-semibold shadow hover:bg-blue-700 transition"
     >
-        {label}
+      {label}
     </button>
   );
 };

@@ -119,93 +119,72 @@ export const BudgetForm: React.FC = () => {
     setLanguages(0);
   };
 
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800">
-      <div className="max-w-7xl w-full mx-auto p-10 rounded-xl shadow-lg bg-gray-900/80 backdrop-blur grid grid-cols-2 gap-8">
-        <div className="space-y-6 text-xl text-gray-200">
-          <h2 className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-fuchsia-500 to-pink-500">
-            ~ Budget Calculator ~
-          </h2>
+ return (
+  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800">
+    <div className="max-w-7xl w-full mx-auto p-4 sm:p-6 md:p-10 rounded-xl shadow-lg bg-gray-900/80 backdrop-blur grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      
+   
+      <div className="space-y-6 text-base sm:text-lg md:text-xl text-gray-200">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-fuchsia-500 to-pink-500 text-center md:text-left">
+          ~ Budget Calculator ~
+        </h2>
 
-          <div className="p-4 tracking-wider bg-gray-800 rounded-md shadow-sm flex justify-between items-center">
-            <Checkbox
-              label="SEO Campaign  (300€)"
-              checked={seoSelected}
-              onChange={setSeoSelected}
-            />
-          </div>
+        <div className="p-3 sm:p-4 tracking-wider bg-gray-800 rounded-md shadow-sm flex justify-between items-center">
+          <Checkbox label="SEO Campaign (300€)" checked={seoSelected} onChange={setSeoSelected} />
+        </div>
 
-          <div className="p-4 tracking-wider bg-gray-800 rounded-md shadow-sm flex justify-between items-center">
-            <Checkbox
-              label="Advertising Campaign  (400€)"
-              checked={adsSelected}
-              onChange={setAdsSelected}
-            />
-          </div>
+        <div className="p-3 sm:p-4 tracking-wider bg-gray-800 rounded-md shadow-sm flex justify-between items-center">
+          <Checkbox label="Advertising Campaign (400€)" checked={adsSelected} onChange={setAdsSelected} />
+        </div>
 
-          <div className="p-4 tracking-wider bg-gray-800 rounded-md shadow-sm">
-            <Checkbox
-              label="Website  (500€)"
-              checked={webSelected}
-              onChange={setWebSelected}
-            />
-            {webSelected && (
-              <WebOptions
-                pages={pages}
-                setPages={setPages}
-                languages={languages}
-                setLanguages={setLanguages}
-              />
-            )}
-          </div>
+        <div className="p-3 sm:p-4 tracking-wider bg-gray-800 rounded-md shadow-sm">
+          <Checkbox label="Website (500€)" checked={webSelected} onChange={setWebSelected} />
+          {webSelected && (
+            <WebOptions pages={pages} setPages={setPages} languages={languages} setLanguages={setLanguages} />
+          )}
+        </div>
 
-          <div className="text-3xl tracking-wider p-4 bg-gray-800 rounded-md text-white font-semibold shadow-md">
-            Total: {annualDiscount ? totalBudget * 0.8 : totalBudget} €
-          </div>
+        <div className="text-xl sm:text-2xl md:text-3xl tracking-wider p-3 sm:p-4 bg-gray-800 rounded-md text-white font-semibold shadow-md text-center md:text-left">
+          Total: {annualDiscount ? totalBudget * 0.8 : totalBudget} €
+        </div>
 
-          <div className="mt-4 space-x-28">
-            <button
-              onClick={() => setAnnualDiscount(!annualDiscount)}
-              className={`px-4 py-2 rounded text-white ${
-                annualDiscount
-                  ? "bg-green-600 hover:bg-green-700"
-                  : "bg-gray-600 hover:bg-gray-700"
-              }`}
-            >
-              {annualDiscount
-                ? "Annual Discount Applied (-20%)"
-                : "Apply Annual Discount"}
-            </button>
-
-            
-          </div>
-
-          <div>
-              <CopyUrlButton label="Copy URL 🔗" />
-          </div>
-          
+        <div className="mt-4 flex justify-center md:justify-start">
           <button
-            onClick={() => navigate("/")}
-            className=" mb-5 ml-52 px-6 py-3 rounded-3xl bg-gradient-to-r from-blue-500 to-fuchsia-600 text-white text-lg font-semibold shadow-lg hover:scale-105 transform transition"
+            onClick={() => setAnnualDiscount(!annualDiscount)}
+            className={`px-4 py-2 rounded text-white ${
+              annualDiscount ? "bg-green-600 hover:bg-green-700" : "bg-gray-600 hover:bg-gray-700"
+            }`}
           >
-            ⬅ Back home
+            {annualDiscount ? "Annual Discount Applied (-20%)" : "Apply Annual Discount"}
           </button>
         </div>
 
-        <div className="space-y-8 p-4 bg-gray-800 rounded-md">
-          <BudgetInputs
-            clientName={clientName}
-            setClientName={setClientName}
-            clientPhone={clientPhone}
-            setClientPhone={setClientPhone}
-            clientEmail={clientEmail}
-            setClientEmail={setClientEmail}
-            onAdd={handleAddBudget}
-          />
-
-          <BudgetList budgets={budgets} />
+        <div className="flex justify-center md:justify-start">
+          <CopyUrlButton label="Copy URL 🔗" />
         </div>
+
+        <button
+          onClick={() => navigate("/")}
+          className="mt-5 mx-auto md:ml-52 px-6 py-3 rounded-3xl bg-gradient-to-r from-blue-500 to-fuchsia-600 text-white text-base sm:text-lg font-semibold shadow-lg hover:scale-105 transform transition"
+        >
+          ⬅ Back home
+        </button>
+      </div>
+
+      <div className="space-y-6 sm:space-y-8 p-3 sm:p-4 bg-gray-800 rounded-md">
+        <BudgetInputs
+          clientName={clientName}
+          setClientName={setClientName}
+          clientPhone={clientPhone}
+          setClientPhone={setClientPhone}
+          clientEmail={clientEmail}
+          setClientEmail={setClientEmail}
+          onAdd={handleAddBudget}
+        />
+        <BudgetList budgets={budgets} />
       </div>
     </div>
-  );
+  </div>
+);
+
 };

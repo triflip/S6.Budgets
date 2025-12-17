@@ -1,7 +1,7 @@
 # ⚡ GrowthHub – Budget Calculator App
 
-![GH_D](src/assets/screenshots/GHdkt.png)  
-![GH_D](src/assets/screenshots/GHmbl.png.png)
+![GH_D](src/assets/screenshots/GrowthHub_Dk.png)  
+![GH_D](src/assets/screenshots/GrowthHub_MV.png)
 
 # 🌐 Visit demo
 
@@ -52,50 +52,7 @@ Open http://localhost:5173 in your browser.
 
 📂 Project structure
 
-s6.budgets
-├──public
-├──src
-│   ├──assets
-│   │   └──screenshots
-│   │   │   ├──GHdkt.png
-│   │   │   └──GHmbl.png
-│   ├──features
-│   │   ├──budgets
-│   │   │   └──components
-│   │   │   │   ├──BudgetForm.tsx
-│   │   │   │   ├──BudgetInputs.tsx
-│   │   │   │   ├──BudgetList.tsx
-│   │   │   │   ├──BudgetSearch.tsx
-│   │   │   │   └──HelpModal.tsx
-│   │   └──webOptions
-│   │   │   └──WebOptions.tsx
-│   ├──pages
-│   │   ├──BudgetPage.tsx
-│   │   ├──NotFoundPage.tsx
-│   │   └──WelcomePage.tsx
-│   ├──shared
-│   │   └──ui
-│   │   │   ├──Checkbox1.tsx
-│   │   │   └──CopyUrlButton.tsx
-│   ├──App.tsx
-│   ├──index.css
-│   └──main.tsx
-├──vscode
-│   └──settings.json
-├──.github
-│   └──workflows
-│   │   └──static.yml
-├──eslint.config.js
-├──index.html
-├──package-lock.json
-├──package.json
-├──postcss.config.js
-├──README.md
-├──tailwind.config.js
-├──tsconfig.json
-├──tsconfig.node.json
-├──vite.config.ts
-└──.gitignore
+![GH_D](src/assets/screenshots/structure.png)
 
 
 ## 🧪 Testing
